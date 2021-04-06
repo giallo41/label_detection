@@ -43,5 +43,25 @@ def get_data(class_type):
     print(pd.Series(labels).value_counts())
     paths = np.array(true_paths + false_paths)
     labels = to_categorical(labels)
-    paths, labels = sklearn_shuffle(paths, labels)
+    if class_type == 'train':
+        paths, labels = sklearn_shuffle(paths, labels)
     return paths, labels
+
+def get_bbox_image(path, train_test):
+    
+    img_path_list = []
+    bbox_list = []
+    with open(f"{path}/label/{train_test}.txt", 'r') as f:
+        #for line in f.readline():
+        lines = f.readlines()
+        for line in lines:
+            file, *bbox = line.strip().split( ',')
+            img_path_list.append(file)
+            b_list = []
+            for item in bbox:
+                b_list.append(float(item))
+            bbox_list.append(b_list)
+    
+    img_path_list = [f"{path}/{train_test}/{file}" for file in img_path_list]
+    
+    return img_path_list, np.array(bbox_list)
