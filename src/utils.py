@@ -9,10 +9,46 @@ from PIL import Image, ImageDraw, ImageFont
 #from IPython.display import display, Javascript
 #from IPython.display import Image as IPyImage
 
-from object_detection.utils import visualization_utils as viz_utils
+#from object_detection.utils import visualization_utils as viz_utils
 
 import sys
 sys.path.append('/home/jupyter/git/models/research')
+
+
+def show_result_img(img, pred, detections, pixels=30):
+    plt.figure(figsize=(12, 10), dpi=80)
+    result_class = [ 'true' if i>0.5  else 'false' for i in np.reshape(pred, (len(pred))) ]
+    
+    image_h, image_w, _ = img.shape
+    
+    #plt.imshow(img)
+    #ax = plt.gca()
+    for txt, bbox in zip(result_class, detections):
+        
+        xmin, ymin, xmax, ymax = bbox['box_points']
+        xmin = max(0, xmin)
+        ymin = max(0, ymin)
+        xmax = min(image_w, xmax)
+        ymax = min(image_h, ymax)
+        
+        #rect = Rectangle((image_w-xmin, image_h-ymin), xmin-xmax, ymin-ymax,
+        #                 linewidth=2,edgecolor='r',facecolor='none')
+        #ax.add_patch(rect)
+        if txt == 'true':
+            c = 'b'
+            rgb = (0,0,255)
+        else:
+            c = 'r'
+            rgb = (255,0,0)
+        plt.text(xmin+5, ymin-11, txt, color='w', fontsize=14,
+                 bbox=dict(fill=True, facecolor=c, edgecolor=c, linewidth=2))
+        
+        cv2.rectangle(img, (xmin, ymin), (xmax, ymax),
+                      rgb, 4)
+	# show the output image
+    #cv2.imshow("Output", img)
+    plt.imshow(img)
+    
 
 def load_image_into_numpy_array(path):
     """Load an image from file into a numpy array.

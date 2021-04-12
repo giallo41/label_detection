@@ -46,20 +46,30 @@ def get_image_value(path, dim, bw, model_type):
             img = img.reshape(img.shape[0], img.shape[1],1)
 
 
-    if model_type.upper() == 'MOBILENET': 
-        img = mobile_preprocess(img)
-        return img
-    elif model_type.upper() == 'VGG16': 
-        img = vgg16_preprocess(img) 
-        return img
+    #if model_type.upper() == 'MOBILENET': 
+    #    img = mobile_preprocess(img)
+    #    return img
+    #elif model_type.upper() == 'VGG16': 
+    #    img = vgg16_preprocess(img) 
+    #    return img
     return img/255.
 
 
-def get_data(class_type): 
-    true_paths = [f'./data/images/syn/{class_type}/true/{file}' for file in os.listdir(f'./data/images/syn/{class_type}/true')]
+def get_data(class_type):
+    file_list = os.listdir(f'./data/images/syn/{class_type}/true')
+    if '.ipynb_checkpoints' in file_list:
+        idx = file_list.index('.ipynb_checkpoints')
+        file_list.pop(idx)
+    
+    true_paths = [f'./data/images/syn/{class_type}/true/{file}' for file in file_list]
     true_labels = [1 for i in range(len(true_paths))]
     
-    false_paths = [f'./data/images/syn/{class_type}/false/{file}' for file in os.listdir(f'./data/images/syn/{class_type}/false')]
+    file_list = os.listdir(f'./data/images/syn/{class_type}/false')
+    if '.ipynb_checkpoints' in file_list:
+        idx = file_list.index('.ipynb_checkpoints')
+        file_list.pop(idx)
+    
+    false_paths = [f'./data/images/syn/{class_type}/false/{file}' for file in file_list]
     false_labels = [0 for i in range(len(false_paths))]
     
     labels = np.array(true_labels + false_labels)
