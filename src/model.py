@@ -43,9 +43,9 @@ class MobileNet:
         model.add(Flatten(name="flatten"))
         model.add(Dense(128, activation="relu"))
         model.add(Dropout(0.5))
-        model.add(Dense(32, activation="relu"))
-        model.add(Dropout(0.5))
-        model.add(Dense(2, activation="sigmoid", name = 'Output'))
+        model.add(Dense(64, activation="relu"))
+        #model.add(Dropout(0.5))
+        model.add(Dense(1, activation="sigmoid", name = 'Output'))
         
         for layer in base_model.layers:
             layer.trainable = False

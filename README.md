@@ -1,8 +1,13 @@
-# label_detection
+# Object Detection : printed label detection 
 
 ------------------
 
 ### This project is for detecting the mis-printed label 
+
+#### The model detecte the printed label in real time 
+- using cv2 
+- detected printed label using videocam 
+- finetune the pretrained objecte detection model resnet50
 
 
 
@@ -17,3 +22,9 @@
 
 ## Model 
 - finetuning the model : ssd_resnet50_v1_fpn_640x640_coco17
+
+
+
+## requirements 
+
+`pip install -r requirements.txt`
