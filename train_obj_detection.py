@@ -6,7 +6,7 @@ trainer.setModelTypeAsYOLOv3()
 data_dir = "./data/images/box/"
 #model_dir = "./data/models/pretrained-yolov3.h5"
 #model_dir = "./data/models/pretrained-yolov3.h5"
-model_dir = f"./data/images/box/models/detection_model-ex-003--loss-0020.019.h5"
+model_dir = f"./data/images/box/best_model/detection_model.h5"
 
 trainer.setDataDirectory(data_directory=data_dir)
 
