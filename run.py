@@ -13,7 +13,7 @@ from imageai.Detection.Custom import CustomObjectDetection
 detector = CustomObjectDetection()
 detector.setModelTypeAsYOLOv3()
 
-D_MODEL_PATH = f"./data/images/box/models/detection_model-ex-003--loss-0013.547.h5"
+D_MODEL_PATH = f"./data/images/box/models/detection_model-ex-030--loss-0010.144.h5"
 JSON_FILE_PATH = f"./data/images/box/json/detection_config.json"
 C_MODEL_PATH = f"./data/models/mobilnet/mobilenet.h5"
 OUTPUT_FILE_NAME = f"tmp.jpg"
@@ -76,7 +76,6 @@ def main():
 
         # show the output image
         cv2.imshow("Output", frame)
-
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
