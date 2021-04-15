@@ -20,10 +20,14 @@
 <img src="./data/images/samples/3.jpg">
 
 
-## Model 
-- finetuning the model : ssd_resnet50_v1_fpn_640x640_coco17
-
-
+## Model : 2 step:
+- 1) Object detection 
+    : Detect the printed label area using 
+   > finetune model : ssd_resnet50_v1_fpn_640x640_coco17
+- 2) Classification 
+    : Classify the true / false labeled print 
+   > finetune model : mobilenet 
+   
 
 ## requirements 
 
