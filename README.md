@@ -11,13 +11,13 @@
 
 
 
-## Sample images 
+## Sample images and Results
 
 > Correctely printed label
-<img src="./data/images/samples/2.jpg">
+<img src="./data/images/results/out01.png">
 
 > Mis-printed Label
-<img src="./data/images/samples/3.jpg">
+<img src="./data/images/results/out02.png">
 
 
 ## Model : 2 step:
@@ -27,7 +27,7 @@
 - 2) Classification 
     : Classify the true / false labeled print 
    > finetune model : mobilenet 
-   
+
 
 ## requirements 
 
