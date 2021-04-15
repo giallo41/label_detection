@@ -18,12 +18,13 @@ sys.path.append('/home/jupyter/git/models/research')
 def show_result_img(img, pred, detections, pixels=30):
     plt.figure(figsize=(12, 10), dpi=80)
     result_class = [ 'true' if i>0.5  else 'false' for i in np.reshape(pred, (len(pred))) ]
+    prob_list = [i for i in np.reshape(pred, (len(pred)))]
     
     image_h, image_w, _ = img.shape
     
     #plt.imshow(img)
     #ax = plt.gca()
-    for txt, bbox in zip(result_class, detections):
+    for txt, prob, bbox in zip(result_class, prob_list, detections):
         
         xmin, ymin, xmax, ymax = bbox['box_points']
         xmin = max(0, xmin)
@@ -40,11 +41,19 @@ def show_result_img(img, pred, detections, pixels=30):
         else:
             c = 'r'
             rgb = (255,0,0)
-        plt.text(xmin+5, ymin-11, txt, color='w', fontsize=14,
-                 bbox=dict(fill=True, facecolor=c, edgecolor=c, linewidth=2))
-        
+        txt = f'{txt} : {prob:.2f}'
+        #plt.text(xmin+5, ymin-11, txt, color='w', fontsize=14,
+        #         bbox=dict(fill=True, facecolor=c, edgecolor=c, linewidth=2))
+
         cv2.rectangle(img, (xmin, ymin), (xmax, ymax),
                       rgb, 4)
+        
+        text_y = ymin - 15 if ymin - 15 > 15 else ymin + 15
+        cv2.putText(img, txt, (xmin, text_y),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, rgb, 2)
+
+        #cv2.rectangle(img, (xmin, ymin), (xmax, ymax),
+        #              rgb, 4)
 	# show the output image
     #cv2.imshow("Output", img)
     plt.imshow(img)
