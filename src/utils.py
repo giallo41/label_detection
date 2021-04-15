@@ -48,6 +48,7 @@ def show_result_img(img, pred, detections, pixels=30):
 	# show the output image
     #cv2.imshow("Output", img)
     plt.imshow(img)
+    return result_class
     
 
 def load_image_into_numpy_array(path):

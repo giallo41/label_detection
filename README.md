@@ -27,4 +27,9 @@
 
 ## requirements 
 
+- 1. install required package 
 `pip install -r requirements.txt`
+
+- 2. install imageai package
+`pip install imageai --upgrade`
+
