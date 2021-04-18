@@ -41,10 +41,10 @@ class MobileNet:
         model.add(base_model)
         model.add(AveragePooling2D(pool_size=(7, 7)))
         model.add(Flatten(name="flatten"))
-        model.add(Dense(128, activation="relu"))
+        model.add(Dense(256, activation="relu"))
         model.add(Dropout(0.5))
-        model.add(Dense(64, activation="relu"))
-        #model.add(Dropout(0.5))
+        model.add(Dense(32, activation="relu"))
+        model.add(Dropout(0.5))
         model.add(Dense(1, activation="sigmoid", name = 'Output'))
         
         for layer in base_model.layers:
