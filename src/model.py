@@ -43,6 +43,11 @@ class MobileNet:
                                  include_top=False,
                                  input_tensor=Input(shape=self.input_shape))
         model.add(base_model)
+        model.add(Conv2D(32, (1,1), 
+                         activation="relu",
+                         kernel_initializer="he_normal",
+                         padding="same",
+                         name="HeatLayer",))
         model.add(AveragePooling2D(pool_size=(7, 7)))
         model.add(Flatten(name="flatten"))
         model.add(Dense(256, activation="relu"))
